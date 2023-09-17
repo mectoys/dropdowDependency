@@ -1,4 +1,4 @@
-# dropdowDependency
+# Dropdow Dependency
 Aprende como crear un desplegable con búsqueda usando Flask, JQuery, Ajax paso a paso
 
 "¡Bienvenidos a mi tutorial en el que descubriremos cómo crear un Desplegable con Dependencia que incluye Búsqueda en tiempo real utilizando Flask, jQuery, Ajax y MySQL! En este emocionante video, aprenderás paso a paso cómo construir un menú desplegable interactivo que se ajusta dinámicamente a las selecciones anteriores.
