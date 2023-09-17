@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
+
+</head>
+<body>
+            <div class="container">
+                <h1 align="center"> Python:Desplegable de dependencia con busqueda usando Flask, jQuery, Ajax con MYSQL    </h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label >Seleccionar Departamento</label>
+                        <select name="departamento" data-live-search="true" id="departamento" class="form-control" title="Seleccionar departamento">
+
+                            {% for row in departamentos  %}
+                            <option value="{{ row.co_ubigeo }}">{{ row.de_ubigeo }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label >Seleccionar Ciudad</label>
+                        <select name="ciudad" data-live-search="true" id="ciudades" class="form-control" title="Seleccionar Ciudad">
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+        <script>
+            $(document).ready(function (){
+                 $("#departamento").selectpicker();
+                 $("#ciudades").selectpicker();
+
+                 function load_data(type, co_ubigeo) {
+                    $.ajax({
+                        url: "/cities",
+                        method: "POST",
+                        data: { type: type, co_ubigeo: co_ubigeo },
+                        dataType: "json",
+                        success: function (data) { //alert(co_ubigeo)
+                            var html = "";
+                            for (var count = 0; count < data.length; count++) {
+                                html += '<option value="' + data[count].co_city + '">' + data[count].de_city + "</option>";
+                            }
+                                $("#ciudades").html(html);
+                                $("#ciudades").selectpicker("refresh");
+                        },
+                    });
+                }
+                  $(document).on("change", "#departamento", function () {
+                    var co_ubigeo = $("#departamento").val();
+                    load_data("ubiData", co_ubigeo);
+                });
+
+            });
+
+        </script>
+</body>
+</html>
